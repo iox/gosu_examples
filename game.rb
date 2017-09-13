@@ -85,6 +85,10 @@ class GameWindow < Gosu::Window
 
       @balloon_sound.play
 
+      if @balls.size == 0
+        @background_image = Gosu::Image.new("win.jpg", :tileable => false, :rect => [0,0,SCREEN_WIDTH,SCREEN_HEIGHT])
+      end
+
       @explode_shape = nil
     end
 
