@@ -9,6 +9,8 @@ class GameWindow < Gosu::Window
     @buttons_down = 0
     @background_image = Gosu::Image.new("background.jpg", :tileable => true)
     @character = Gosu::Image.new("character.png", retro: true, rect: [100,150,300,500])
+    @music = Gosu::Song.new("alicia_sevilla_encuentro_con_el_noctambulo.mp3")
+    @music.play
   end
 
   def update
