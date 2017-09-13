@@ -4,6 +4,7 @@
 
 require 'gosu'
 require 'chipmunk'
+require 'pry-byebug'
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -60,6 +61,10 @@ class GameWindow < Gosu::Window
   def update
     @x -= 5 if button_down?(Gosu::KbLeft)
     @x += 5 if button_down?(Gosu::KbRight)
+
+    if button_down?(Gosu::KbReturn)
+      binding.pry
+    end
 
 
     # If the up button is pressed, another ball appears - you can only shot once a second
