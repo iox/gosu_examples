@@ -7,13 +7,15 @@ class GameWindow < Gosu::Window
     @x = @y = 10
     @draws = 0
     @buttons_down = 0
+    @background_image = Gosu::Image.new("background.jpg", :tileable => true)
+    @character = Gosu::Image.new("character.png", retro: true, rect: [100,150,300,500])
   end
 
   def update
-    @x -= 1 if button_down?(Gosu::KbLeft)
-    @x += 1 if button_down?(Gosu::KbRight)
-    @y -= 1 if button_down?(Gosu::KbUp)
-    @y += 1 if button_down?(Gosu::KbDown)
+    @x -= 2 if button_down?(Gosu::KbLeft)
+    @x += 2 if button_down?(Gosu::KbRight)
+    @y -= 2 if button_down?(Gosu::KbUp)
+    @y += 2 if button_down?(Gosu::KbDown)
   end
 
   def button_down(id)
@@ -26,21 +28,16 @@ class GameWindow < Gosu::Window
   end
 
   def needs_redraw?
-    @draws == 0 || @buttons_down > 0
+    @draws < 10 || @buttons_down > 0
   end
 
   def draw
+    @background_image.draw(0, 0, 0)
     @draws += 1
-    @message = Gosu::Image.from_text(
-      self, info, Gosu.default_font_name, 30)
-    @message.draw(@x, @y, 0)
+    # x, y, z, scale_x, scale_y
+    @character.draw(@x, @y, 1, 0.15, 0.15)
   end
 
-  private
-
-  def info
-    "[x:#{@x};y:#{@y};draws:#{@draws}]"
-  end
 end
 
 window = GameWindow.new
